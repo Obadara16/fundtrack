@@ -21,7 +21,7 @@ const Navmenu = () => {
             </a>
           </li>
         ))}
-          <Link to="/login"><Button styles="mt-0"/></Link>
+          <Button styles="mt-0"/>
       </ul>
 
       <div className=' md:hidden flex flex-1 justify-end items-center'>
