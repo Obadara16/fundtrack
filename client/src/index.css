@@ -42,6 +42,13 @@
   );
 }
 
+.auth-image {
+  background-image: url('/client/src/assets/bgimage.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 .bg-purple-gradient {
   background: linear-gradient(
     157.81deg,

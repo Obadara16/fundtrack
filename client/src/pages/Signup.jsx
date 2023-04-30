@@ -6,6 +6,7 @@ import styles from "../style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
+import { bgimage, logo } from "../assets";
 
 const Signup = () => {
   const isFetching = false;
@@ -51,12 +52,15 @@ const Signup = () => {
   }, []);
 
   return (
-    <div className="bg-primary w-full overflow-hidden min-h-screen font-poppins flex flex-col items-center justify-center ">
-        <div className={` bg-primary w-full h-full ${styles.paddingX} ${styles.flexStart}`}>
-            <div className={`${styles.boxWidth}`}>\
-                <div className="w-full mx-auto flex justify-center items-center flex-col my-10 gap-4">
+    <div className=" w-full overflow-hidden min-h-screen font-poppins flex flex-col items-center justify-center bg-cover bg-center" style={{ backgroundImage: `url(${bgimage})` }}>
+        <div className={`w-full h-full ${styles.paddingX} ${styles.flexStart} flex  flex-col`}>
+            <div className="justify-start my-4">
+                <Link to="/"><img src={logo} alt="logo"/></Link>
+            </div>
+            <div className={`${styles.boxWidth}`}>
+                <div className="w-full mx-auto flex justify-center items-center my-10 gap-4">
                     <form
-                    className="flex flex-col my-4 sm-w-full md:w-2/5 gap-8 bg-white p-10"
+                    className="flex flex-col my-4 sm-w-full md:w-2/5 gap-8 bg-white p-10 rounded-xl"
                     onSubmit={handleSubmit(onSubmit)}
                     >
                         <h1 className="text-2xl font-light text-secondary">Sign Up</h1>

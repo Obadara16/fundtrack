@@ -14,7 +14,7 @@ import Signup from "./pages/Signup";
 
 const App = () => {
   return (
-    <div className="bg-primary w-full overflow-hidden">
+    <div className=" w-full overflow-hidden">
       <ScrollToTop/>
       <Routes>
         <Route index path="/" element={<Home/>}/>
