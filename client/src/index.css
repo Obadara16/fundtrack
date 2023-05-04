@@ -61,6 +61,10 @@
   );
 }
 
+.bg-btn-purple-gradient {
+  background: linear-gradient(to bottom right, #833e85 0%, #521a5a 100%);
+}
+
 
 .bg-black-gradient {
   background: linear-gradient(

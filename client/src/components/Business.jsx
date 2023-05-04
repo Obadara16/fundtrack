@@ -21,7 +21,7 @@ const Business = () => {
       <div className={layout.sectionInfo}>
         <h2 className={styles.heading2}>Focus on Business, <br className='sm:block hidden'/> Let's handle the money.</h2>
         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>With our app, you can easily manage your funds and make transactions with ease. Our advanced algorithm analyzes your transactions and predicts your spending habits, allowing you to plan and budget better.</p>
-        <Button styles="mt-10"/>
+        <Button styles="mt-10" text="Get Started"/>
       </div>
 
       <div className={`${layout.sectionImg} flex-col`}>

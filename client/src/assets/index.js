@@ -25,6 +25,9 @@ import people02 from "./people02.png";
 import people03 from "./people03.png";
 import hero from "./hero.png"
 import bgimage from "./bgimage.jpg"
+import netflix from "./netflix.png"
+import spotify from "./spotify.png"
+import icon from "./icon.svg"
 
 export {
   airbnb,
@@ -54,4 +57,7 @@ export {
   people02,
   people03,
   bgimage,
+  netflix,
+  spotify,
+  icon
 };

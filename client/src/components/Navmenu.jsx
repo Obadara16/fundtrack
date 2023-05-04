@@ -21,7 +21,7 @@ const Navmenu = () => {
             </a>
           </li>
         ))}
-          <Button styles="mt-0"/>
+          <Button styles="mt-0" text="Login"/>
       </ul>
 
       <div className=' md:hidden flex flex-1 justify-end items-center'>
@@ -43,7 +43,7 @@ const Navmenu = () => {
                 className={`font-poppins font-normal cursor-pointer text-[16px]  hover:text-secondary  text-white`} 
               >
                 <Link to="/login">
-                  Get Started
+                  Login
                 </Link>
               </li>
           </ul>
