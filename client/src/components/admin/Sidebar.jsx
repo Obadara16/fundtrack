@@ -1,16 +1,19 @@
 import React, { useEffect } from "react";
 import {
-  FaDelicious,
   FaShoppingCart,
   FaWallet,
   FaChartLine,
   FaRegClock,
   FaCog,
   FaSignOutAlt,
+  FaHouseUser,
 } from "react-icons/fa";
-import { icon, logo, people02 } from "../assets/index"
+import { logo } from "../../assets";
+import { useAuth } from "../../context/useAuth";
+import { useNavigate } from "react-router-dom";
 
-function Menu() {
+function Sidebar() {
+  
 useEffect(() => {
     const mainMenuLi = document
     .getElementById("mainMenu")
@@ -24,13 +27,22 @@ useEffect(() => {
     mainMenuLi.forEach((n) => n.addEventListener("click", changeActive));
 }, []);
 
+  const navigate = useNavigate();
+
+    let { logout } = useAuth()
+    const handleLogout = () => {
+      logout();
+      navigate("/")
+      console.log("handle logout is been called")
+    };
+
   return (
-    <menu className="w-1/8 h-screen flex flex-col items-center shadow sticky top-0 text-white py-4 px-6" style={{background: "#0a010f"}}>
-      <img src={people02} alt="" className="w-[50px]  h-[60px] pt-8" />
+    <menu className="w-full h-full flex flex-col items-center shadow sticky top-0 text-white px-10" style={{background: "#020d2d"}}>
+      <img src={logo} alt="" className="w-[50px]  h-[50px] pt-8" />
       
 
-      <ul id="mainMenu" className="pt-8 w-full flex flex-col items-center gap-10">
-        <Icon icon={<FaDelicious />} />
+      <ul id="mainMenu" className="pt-14 w-full flex flex-col items-center gap-10">
+        <Icon icon={<FaHouseUser />} />
         <Icon icon={<FaShoppingCart />} />
         <Icon icon={<FaWallet />} />
         <Icon icon={<FaChartLine />} />
@@ -39,7 +51,7 @@ useEffect(() => {
 
       <ul className="lastMenu mt-auto flex flex-col items-center gap-10 mb-10">
         <Icon icon={<FaCog />} />
-        <Icon icon={<FaSignOutAlt />} />
+        <button onClick={handleLogout}><Icon icon={<FaSignOutAlt />} /></button>
       </ul>
     </menu>
   );
@@ -51,4 +63,4 @@ const Icon = ({ icon }) => (
   </li>
 );
 
-export default Menu;
+export default Sidebar;

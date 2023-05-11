@@ -6,15 +6,15 @@ const VerificationSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  code: {
+  otp: {
     type: String,
-    required: true,
+    required: true
   },
   createdAt: {
     type: Date,
     default: Date.now,
-    expires: '24h', // Verification code will expire after 24 hours
-  },
+    expires: 600 // Expire OTP documents after 10 minutes
+  }
 });
 
 module.exports = mongoose.model('Verification', VerificationSchema);

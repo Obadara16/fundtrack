@@ -1,15 +1,15 @@
-const jwt = require('jsonwebtoken')
-const Auth = require('../models/authModel')
+const jwt = require("jsonwebtoken");
+const Auth = require("../models/authModel");
 
 const requireAuth = async (req, res, next) => {
   try {
     // extract the access token from the authorization header
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1];
+    const token = authHeader && authHeader.split(" ")[1];
 
     // if there's no token, return an error
     if (!token) {
-      return res.status(401).json({ error: 'Unauthorized' });
+      return res.status(401).json({ error: "Unauthorized" });
     }
 
     // verify the token using the JWT secret
@@ -20,7 +20,7 @@ const requireAuth = async (req, res, next) => {
 
     // if the user doesn't exist, return an error
     if (!user) {
-      return res.status(401).json({ error: 'Unauthorized' });
+      return res.status(401).json({ error: "Unauthorized" });
     }
 
     // add the user object to the request object for future use
@@ -30,43 +30,50 @@ const requireAuth = async (req, res, next) => {
     next();
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
 const requireAuthAndAuthorization = async (req, res, next) => {
   try {
     await requireAuth(req, res, async () => {
-      const userId = req.user._id.toString()
-      const { id } = req.params
+      const userId = req.user._id.toString();
+      console.log("this is userId in the databsae", userId)
+      const { id } = req.params;
+      console.log("this is id in params", id)
 
       if (userId === id || req.user.isAdmin) {
-        next()
+        next();
       } else {
-        res.status(403).json({ error: 'Unauthorized access' })
+        res.status(403).json({ error: "Unauthorized access" });
       }
-    })
+    });
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: 'Internal server error' })
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
   }
-}
+};
 
 const requireAuthAndAdmin = async (req, res, next) => {
   try {
     await requireAuth(req, res, async () => {
-      console.log(req.user)
+      console.log(req.user);
       if (req.user && req.user.isAdmin) {
-        next()
+        next();
       } else {
-        res.status(403).json({ error: 'You do not have access to perform this action' })
+        res
+          .status(403)
+          .json({ error: "You do not have access to perform this action" });
       }
-    })
+    });
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: 'Internal server error' })
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
   }
-}
+};
 
-
-module.exports = {requireAuth, requireAuthAndAuthorization, requireAuthAndAdmin}
+module.exports = {
+  requireAuth,
+  requireAuthAndAuthorization,
+  requireAuthAndAdmin,
+};

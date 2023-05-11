@@ -2,6 +2,8 @@ import React from 'react'
 import { features } from '../constants'
 import styles, { layout } from '../style'
 import Button from './Button'
+import { fadeIn, staggerContainer } from '../utils/motion';
+import { motion } from 'framer-motion';
 
 const FeatureCard = ({icon, title, content, index }) => (
   <div className={`flex flex-row p-6 rounded-[20px] ${index !== features.length - 1 ? "mb-6" : "mb-0"} feature-card`}>
@@ -17,7 +19,8 @@ const FeatureCard = ({icon, title, content, index }) => (
 
 const Business = () => {
   return (
-    <section id="features" className={layout.section}>
+    <section
+     id="features" className={layout.section}>
       <div className={layout.sectionInfo}>
         <h2 className={styles.heading2}>Focus on Business, <br className='sm:block hidden'/> Let's handle the money.</h2>
         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>With our app, you can easily manage your funds and make transactions with ease. Our advanced algorithm analyzes your transactions and predicts your spending habits, allowing you to plan and budget better.</p>

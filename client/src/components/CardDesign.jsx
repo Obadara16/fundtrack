@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import PaymentCard from 'react-payment-card-component'
+import { AppContext } from '../context/usercontext'
 
 const CardDesign = () => {
     const [isFlipped, setIsFlipped] = useState(false)
@@ -7,6 +8,11 @@ const CardDesign = () => {
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
   }
+
+  const user = useContext(AppContext);
+  const userInfo = user.userProfile
+  const fullName = userInfo.firstName + " " + userInfo.lastName
+
   return (
     <div onClick={handleFlip}>
         <PaymentCard
@@ -16,7 +22,7 @@ const CardDesign = () => {
       brand="mastercard"
       number="4111111111111111"
       cvv="202"
-      holderName="Eleanor Pena"
+      holderName={fullName}
       expiration="12/20"
       flipped={isFlipped}
     />

@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+import Verification from "./pages/Verification";
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/otp-verification" element={<Verification/>}/>
       </Routes>
     </div>
   );

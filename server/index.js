@@ -23,8 +23,6 @@ app.use((req, res, next) => {
 app.use("/uploads", express.static("uploads"));
 
 const allowedOrigins = [
-  "https://afrimart.onrender.com",
-  "https://afrimart-backend.onrender.com/api/",
   "http://localhost:3000",
   "http://localhost:5000",
 ];

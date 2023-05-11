@@ -1,5 +1,8 @@
 // Referral model
-const referralSchema = new mongoose.Schema(
+const mongoose = require("mongoose")
+
+
+const ReferralSchema = new mongoose.Schema(
   {
     referrer: {
       type: mongoose.Schema.Types.ObjectId,
@@ -23,4 +26,4 @@ const referralSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Referral = mongoose.model("Referral", referralSchema);
+module.exports = mongoose.model('Referral', ReferralSchema);

@@ -18,6 +18,26 @@
   scroll-behavior: smooth;
 }
 
+body {
+  font-family: "Poppins";
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.admin-gradient {
+  background: linear-gradient(
+    144.39deg,
+    #C961DE 28.74%,
+    #2954A3 90.91%
+  )
+};
+
 .text-gradient {
   background: radial-gradient(
     ellipse at center,

@@ -1,14 +1,14 @@
 import React from 'react'
-import Menu from '../components/Menu'
-import Fullbar from '../components/Fullbar'
+import Sidebar from '../components/admin/Sidebar'
+import Mainbar from '../components/admin/Mainbar'
 
 const Dashboard = () => {
   return (
     <div className='flex w-full'>
       <div className='hidden md:block'>
-        <Menu/>
+        <Sidebar/>
       </div>
-      <Fullbar/>
+      <Mainbar/>
       
     </div>
   )

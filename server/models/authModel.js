@@ -1,68 +1,77 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const authSchema = new Schema ({
+const authSchema = new Schema(
+  {
     email: {
-        type: String,
-        required: true,
-        unique: true     
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     lastName: {
-        type: String,
-        required: false
+      type: String,
+      required: false,
     },
     firstName: {
-        type: String,
-        required: false
+      type: String,
+      required: false,
     },
     gender: {
-        type: String,
-        required: false
+      type: String,
+      required: false,
     },
     age: {
-        type: Number,
-        required: false
+      type: Number,
+      required: false,
     },
     accessToken: {
-        type: String,
-      },
-      refreshToken: {
-        type: String,
-      },
-    walletBalance: {
-         type: Number, 
-         default: 0 
+      type: String,
     },
-    balance: {
+    refreshToken: {
+      type: String,
+    },
+    walletBalance: {
+      balance: {
         type: Number,
         default: 0,
       },
-      referralCode: {
+      paystackRef: {
         type: String,
-        unique: true,
+        default: undefined,
       },
-      referredBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-      },
+    },
+    balance: {
+      type: Number,
+      default: 0,
+    },
+    referralCode: {
+      type: String,
+      unique: true,
+    },
+    referredBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     isAdmin: {
-        type: Boolean,
-        default: false,
+      type: Boolean,
+      default: false,
     },
     isVerified: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
     img: {
-        type: String
+      type: String,
     },
     resetToken: {
-        type: String
+      type: String,
     },
-}, {timestamps: true})
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('User', authSchema)
+module.exports = mongoose.model("User", authSchema);

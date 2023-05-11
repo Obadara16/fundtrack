@@ -12,7 +12,7 @@ const { requireAuthAndAuthorization, requireAuthAndAdmin } = require("../middlew
 
 router.put('/:id', requireAuthAndAuthorization, updateUser)
 router.delete('/:id', requireAuthAndAuthorization, deleteUser)
-router.get("/find/:id", requireAuthAndAdmin, getUserById)
+router.get("/find/:id", requireAuthAndAuthorization, getUserById)
 router.get("/", requireAuthAndAdmin, getAllUsers)
 router.get("/:userId/balance", requireAuthAndAdmin, updateUserBalance)
 

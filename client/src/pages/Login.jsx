@@ -7,14 +7,47 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { bgimage, logo } from "../assets";
+import { useAuth } from "../context/useAuth";
+import { AppName } from "../constants";
+import Loader from "../atoms/Loader";
+import { urlForAuth, urlForUsers } from "../constants/endpoints";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-regular-svg-icons";
+import { generalPostRequest, postRequest } from "../utils/api";
+import Alert from "../components/Alert";
+import axios from "axios";
+
+const style = {
+  iconstyle: {
+    position: "absolute",
+    right: "8%",
+    top: "30%",
+    cursor: "pointer",
+  },
+};
 
 const Login = () => {
-  const isFetching = false;
-
+  let { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showpassword, setShowPassword] = useState(false);
+  const [show, setShow] = useState(false);
   const [alerting, setAlerting] = useState({
     color: "",
     data: "",
   });
+  const [response, setResponse] = useState({});
+  const [toggleConfirm, setToggleConfirm] = useState(false);
+
+  //togglepassword
+  const togglePassword = () => {
+    setShowPassword(!showpassword);
+  };
+  //toggleconfirm
+  const toggleConfirmPassword = () => {
+    setToggleConfirm(!toggleConfirm);
+  };
+
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -26,29 +59,41 @@ const Login = () => {
     password: yup.string().required("Password is required"),
   });
 
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-
-  const onSubmit = async (data) => {
-    // dispatch(login(data.email, data.password));
+  //submit form
+  const handleLogin = async (e) => {
+    setShow(true);
+    setResponse(true);
+    e.preventDefault();
+    // setAlerting({ color: 'primary', data: 'please wait!' })
+    try {
+      const response = await generalPostRequest(urlForAuth.login, {
+        email,
+        password,
+      });
+      setResponse(response);
+      console.log(response);
+      if (response.status === 200) {
+        window.localStorage.setItem(
+          "__xTFTGweTHDeRTT__%",
+          JSON.stringify(response.data.tokens.accessToken)
+        );
+  
+        setAlerting({ color: "success", data: `Welcome to ${AppName}` });
+  
+        login().then(() => {
+          window.location = "/dashboard";
+        });
+      } else {
+        setAlerting({ color: "danger", data: response.data.error });
+      }
+      setShow(false);
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
+    
   };
-
-  useEffect(() => {
-    // if (success) {
-    //   setAlerting({
-    //     color: "success",
-    //     data: `Welcome Back ${success}`,
-    //   });
-    //   navigate("/");
-    // } else {
-    //   setAlerting({ color: "danger", data: error });
-    // }
-  }, []);
 
   return (
     <div
@@ -67,7 +112,7 @@ const Login = () => {
           <div className="w-full mx-auto flex justify-center items-center flex-col my-10 gap-4">
             <form
               className="flex flex-col mt-4 sm-w-full md:w-1/3 gap-8 bg-white p-10 rounded-xl"
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleLogin}
             >
               <h1 className="text-2xl font-light text-gradient">Login</h1>
               <p className="text-center text-gradient">
@@ -76,39 +121,49 @@ const Login = () => {
               <div className="relative">
                 <input
                   type="email"
-                  {...register("email")}
-                  className={`block px-2.5 pb-2.5 pt-4 w-full text-sm text-secondary bg-transparent rounded-lg border border-bg-purple-gradient appearance-none dark:text-white dark:border-secondary dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-bg-purple-gradient peer ${
-                    errors.email ? "border-red-500" : ""
+                  value={email}
+                  onChange={({ target: { value } }) => setEmail(value)}
+                  required={true}
+                  className={`block px-2.5 pb-2.5 pt-4 w-full text-sm text-secondary bg-transparent rounded-lg border border-bg-purple-gradient appearance-none dark:text-white dark:border-secondary dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-bg-purple-gradient peer
                   }`}
                   placeholder=" "
                 />
                 <label
                   htmlFor="email"
-                  className={`absolute text-sm text-secondary dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-btn-green peer-focus:dark:text-custom-btn-green peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 ${
-                    errors.email ? "text-red-500" : ""
+                  className={`absolute text-sm text-secondary dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-btn-green peer-focus:dark:text-custom-btn-green peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 
                   }`}
                 >
-                  {errors.email ? errors.email.message : "Email "}
+                  Email
                 </label>
               </div>
 
-              <div className="relative">
-                <input
-                  type="password"
-                  {...register("password")}
-                  className={`block px-2.5 pb-2.5 pt-4 w-full text-sm text-secondary bg-transparent rounded-lg border border-bg-purple-gradient appearance-none dark:text-white dark:border-secondary dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-bg-purple-gradient peer ${
-                    errors.password ? "border-red-500" : ""
-                  }`}
-                  placeholder=" "
-                />
-                <label
-                  htmlFor="password"
-                  className={`absolute text-sm text-secondary dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-btn-green peer-focus:dark:text-custom-btn-green peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 ${
-                    errors.password ? "text-red-500" : ""
-                  }`}
-                >
-                  {errors.password ? errors.password.message : "Password "}
-                </label>
+              <div className="relative w-full">
+                <div className="relative w-full">
+                  <input
+                    type={showpassword ? "text" : "password"}
+                    value={password}
+                    onChange={({ target: { value } }) => setPassword(value)}
+                    required={true}
+                    className={`block px-2.5 pb-2.5 pt-4 w-full text-sm text-secondary bg-transparent rounded-lg border border-bg-purple-gradient appearance-none dark:text-white dark:border-secondary dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-bg-purple-gradient peer
+                    }`}
+                    placeholder=" "
+                  />
+                  <label
+                    htmlFor="password"
+                    className={`absolute text-sm text-secondary dark:text-secondary duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-btn-green peer-focus:dark:text-custom-btn-green peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1
+                    }`}
+                  >
+                    Password
+                  </label>
+                </div>
+                <div style={style.iconstyle}>
+                  <FontAwesomeIcon
+                    icon={faEye}
+                    color="#000000"
+                    onClick={togglePassword}
+                    size={"xs"}
+                  />
+                </div>
               </div>
 
               <div className="flex justify-end">
@@ -120,18 +175,19 @@ const Login = () => {
                 </Link>
               </div>
               <div className="flex flex-col">
-               <Link to="/dashboard">
-               <button
+                {response.statusText ? (
+                  <Alert color={alerting.color} data={alerting.data} />
+                ) : null}
+                <button
                   className={`w-full px-4 h-[54px] rounded cursor-pointer ${
-                    isFetching
+                    show
                       ? "bg-blue-gradient text-secondary"
                       : "bg-purple-gradient text-white"
                   }`}
-                  disabled={isFetching}
+                  disabled={show}
                 >
-                  {isFetching ? "Loading..." : "Login"}
+                  {show ? <Loader /> : "Login"}
                 </button>
-               </Link>
               </div>
               <p className="text-center text-[14px] text-gradient">
                 Don't have an account ?{" "}

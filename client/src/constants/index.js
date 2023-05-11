@@ -90,31 +90,38 @@ export const stats = [
 
 export const footerLinks = [
   {
+    id: 1,
     title: "Useful Links",
     links: [
       {
+        id:  1,
         name: "Content",
         link: "https://www.hoobank.com/content/",
       },
       {
+        id:  2,
         name: "How it Works",
         link: "https://www.hoobank.com/how-it-works/",
       },
       {
+        id:  3,
         name: "Create",
         link: "https://www.hoobank.com/create/",
       },
       {
+        id:  4,
         name: "Explore",
         link: "https://www.hoobank.com/explore/",
       },
       {
+        id:  5,
         name: "Terms & Services",
         link: "https://www.hoobank.com/terms-and-services/",
       },
     ],
   },
   {
+    id: 2,
     title: "Community",
     links: [
       {
@@ -140,6 +147,7 @@ export const footerLinks = [
     ],
   },
   {
+    id: 3,
     title: "Partner",
     links: [
       {
@@ -195,3 +203,5 @@ export const clients = [
     logo: dropbox,
   },
 ];
+
+export const AppName = 'FundTrack'

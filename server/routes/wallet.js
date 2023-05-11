@@ -1,6 +1,6 @@
 const express =require("express")
 const router = express.Router()
-const {getWalletBalance, addFunds, withdrawFunds} = require('../controllers/walletController')
+const {getWalletBalance, addFunds, withdrawFunds, updateWalletBalance} = require('../controllers/walletController')
 const { requireAuth,  requireAuthAndAdmin } = require("../middlewares/requireAuth");
 
 
@@ -8,6 +8,7 @@ const { requireAuth,  requireAuthAndAdmin } = require("../middlewares/requireAut
 router.get('/:userId', requireAuth, getWalletBalance);
 router.post('/add', requireAuth, addFunds);
 router.post('/withdraw', requireAuth, withdrawFunds);
+router.post('/update', requireAuth, updateWalletBalance);
 
 
 
