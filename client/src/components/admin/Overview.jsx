@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { FaTheRedYeti } from 'react-icons/fa'
 import { netflix, spotify } from '../../assets';
 import { AppContext } from '../../context/usercontext';
+import CurrencyFormat from '../../atoms/CurrencyFormat';
 
 const Overview = () => {
     const user = useContext(AppContext);
@@ -16,7 +17,7 @@ const Overview = () => {
             <div className='flex-1 w-fit flex justify-between'>
                 <div className=''>
                     <p className='text-center text-[14px]'>EARNING</p>
-                    <h3 className='font-light text-[24px]'>NGN 21,500.00</h3>
+                    <CurrencyFormat value={21500} size={24}/>
                     <p className='text-[12px]'>12.81%</p>
                 </div>
                 <div className=''>
@@ -26,7 +27,7 @@ const Overview = () => {
             <div className='flex-1 w-fit flex justify-between'>
                 <div className=''>
                     <p className='text-center text-[14px]'>EXPENSES</p>
-                    <h3 className='font-light text-[24px]'>NGN 21,500.00</h3>
+                    <CurrencyFormat value={21500} size={24}/>
                     <p className='text-[12px]'>12.81%</p>
                 </div>
                 <div className=''>
@@ -48,7 +49,7 @@ const Overview = () => {
                         </div>
                     </div>
                     <div className='flex-1 flex text-center items-center justify-center'>
-                        <p className='md:text-[20px]'>NGN 20.30</p>
+                    <CurrencyFormat value={3250.50} size={20}/>
                     </div>
                     <div className='flex-1 flex justify-center items-center'>
                         <button className='px-4 text-white py-2 mx-auto whitespace-nowrap bg-btn-purple-gradient '>Pay Now</button>
@@ -66,7 +67,7 @@ const Overview = () => {
                         </div>
                     </div>
                     <div className='flex-1 flex text-center items-center justify-center'>
-                        <p className='md:text-[20px]'>NGN 30.10</p>
+                    <CurrencyFormat value={1500} size={20}/>
                     </div>
                     <div className='flex-1 flex justify-center items-center'>
                         <button className='px-4 text-white py-2 mx-auto whitespace-nowrap bg-btn-purple-gradient'>Pay Now</button>

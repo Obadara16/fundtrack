@@ -34,7 +34,7 @@ const updateWalletBalance = async (req, res) => {
 
     // Verify the payment with Paystack
     const paystackResponse = await paystack.transaction.verify(reference);
-    console.log(paystackResponse)
+    console.log(paystackResponse);
 
     // Get the user associated with the Paystack reference
     const user = await User.findOne({ "walletBalance.paystackRef": reference });
@@ -56,7 +56,7 @@ const updateWalletBalance = async (req, res) => {
     });
     await transaction.save();
 
-    res.send({message: paystackResponse.message});
+    res.send({ message: paystackResponse.message });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -129,32 +129,30 @@ const withdrawFunds = async (req, res) => {
     });
 
     // Update the user's wallet balance with the new balance
-  const previousBalance = user.walletBalance.balance;
-  user.walletBalance.balance -= amount;
-  await user.save();
+    const previousBalance = user.walletBalance.balance;
+    user.walletBalance.balance -= amount;
+    await user.save();
 
-  // Create a new transaction record
-  const transaction = new Transaction({
-    userId: user._id,
-    type: "withdraw",
-    amount: amount,
-    date: new Date(),
-    reference: transferResponse.data.reference,
-  });
-  await transaction.save();
+    // Create a new transaction record
+    const transaction = new Transaction({
+      userId: user._id,
+      type: "withdraw",
+      amount: amount,
+      date: new Date(),
+      reference: transferResponse.data.reference,
+    });
+    await transaction.save();
 
-  // Send a response to the user with the new balance
-  res.json({
-    message: "Withdrawal initiated successfully",
-    previousBalance,
-    newBalance: user.walletBalance.balance,
-  });
+    // Send a response to the user with the new balance
+    res.json({
+      message: "Withdrawal initiated successfully",
+      previousBalance,
+      newBalance: user.walletBalance.balance,
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
-
-
 
 module.exports = {
   getWalletBalance,

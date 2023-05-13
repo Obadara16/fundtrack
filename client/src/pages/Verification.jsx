@@ -7,8 +7,8 @@ import { getStorageValue } from "../utils/storage";
 import PostButton from "../atoms/PostButton";
 import Alert from "../components/Alert";
 import { bgimage } from "../assets";
-import axios from "axios";
 import Loader from "../atoms/Loader";
+import axios from "axios";
 
 const Verification = () => {
   let navigate = useNavigate();
@@ -24,20 +24,18 @@ const Verification = () => {
     setOtp(enteredOtp);
   };
 
-
   //verification
   const verify = async (e) => {
+    e.preventDefault();
     setShow(true);
-  console.log(otp)
 
     const response = await axios.post(urlForUsers.otp, {
-      email: getStorageValue("email", ""),
       otp: otp,
     });
     setResponse(response);
     if (response.status === 200) {
       setAlerting({ color: "success", data: "User created successfully" });
-      navigate("/auth/login", { replace: true });
+      navigate("/login", { replace: true });
     } else {
       setAlerting({ color: "danger", data: response.data.message });
     }
@@ -50,15 +48,15 @@ const Verification = () => {
       style={{ backgroundImage: `url(${bgimage})` }}
     >
       <div className="w-fit overflow-hidden h-full font-poppins flex flex-col mx-auto items-center justify-center sm:bg-contain bg-center bg-white text-black px-10 py-10">
-
         <div className="">
           <h1 className="font-bold text-3xl mb-4">Otp verification</h1>
           <p className="text-sm">
-            please check your email for otp secure code sent to finish your registration
+            please check your email for otp secure code sent to finish your
+            registration
           </p>
         </div>
 
-        <div className="flex flex-col">
+        <form className="flex flex-col" onSubmit={verify}>
           <div className="mb-10">
             <div className="flex justify-center md:mt-10">
               <OtpInput
@@ -94,8 +92,7 @@ const Verification = () => {
             <PostButton
               text={show ? <Loader /> : "Submit"}
               width="250px"
-              onclick={verify}
-              disabled={otp === '' ? true : false}
+              disabled={otp === "" ? true : false}
             />
 
             {/* <div className="text-start mt-3">
@@ -105,8 +102,7 @@ const Verification = () => {
               />
             </div> */}
           </div>
-        </div>
-
+        </form>
       </div>
     </div>
   );

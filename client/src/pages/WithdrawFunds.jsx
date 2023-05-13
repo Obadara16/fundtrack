@@ -48,7 +48,7 @@ const WithdrawFunds = () => {
             },
           }
         );
-        console.log("i got here");
+        console.log("banks loaded", response);
         setAccountName(response.data.data.account_name);
       } catch (error) {
         console.log(error);

@@ -12,6 +12,7 @@ import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { urlForAuth, urlForUsers } from "../constants/endpoints";
 import { postRequest } from "../utils/api";
 import { getStorageValue, useLocalStorage } from "../utils/storage";
+import Alert from "../components/Alert";
 
 const style = {
   iconstyle: {
@@ -53,7 +54,7 @@ const Signup = () => {
       setAlerting({ color: "success", data: "User created successfully" });
       navigate("/otp-verification", { replace: true });
     } else {
-      setAlerting({ color: "danger", data: response.data.message });
+      setAlerting({ color: "danger", data: response.data.error});
     }
   };
 
@@ -181,6 +182,9 @@ const Signup = () => {
                 </Link>
               </div>
               <div className="flex flex-col">
+              {response.statusText ? (
+                  <Alert color={alerting.color} data={alerting.data} />
+                ) : null}
                 <button
                   className={`w-full px-4 h-[54px] rounded cursor-pointer ${
                     show

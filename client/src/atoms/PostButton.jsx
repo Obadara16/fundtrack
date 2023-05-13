@@ -5,7 +5,7 @@ const PostButton = ({ text, onclick, size, color, width, disabled, value }) => {
   return (
     <>
       <button
-        className={`bg-gradient-to-r from-blue-900 via-blue-700 to-blue-900 text-light rounded-md font-light py-2 px-6 ${size === 'sm' ? 'text-xs' : 'text-base'} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`bg-gradient-to-r from-blue-900 via-blue-700 to-blue-900 text-light text-white rounded-md font-light py-2 px-6 ${size === 'sm' ? 'text-xs' : 'text-base'} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         style={{
           width: `${width}`,
         }}

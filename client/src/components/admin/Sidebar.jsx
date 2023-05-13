@@ -7,10 +7,17 @@ import {
   FaCog,
   FaSignOutAlt,
   FaHouseUser,
+  FaList,
+  FaWindowClose,
+  FaWindows,
+  FaWindowRestore,
+  FaDoorClosed,
+  FaDoorOpen,
+  FaWindowMaximize,
 } from "react-icons/fa";
 import { logo } from "../../assets";
 import { useAuth } from "../../context/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Sidebar() {
   
@@ -42,8 +49,8 @@ useEffect(() => {
       
 
       <ul id="mainMenu" className="pt-14 w-full flex flex-col items-center gap-10">
-        <Icon icon={<FaHouseUser />} />
-        <Icon icon={<FaShoppingCart />} />
+        <Link to="/dashboard"><Icon icon={<FaWindowMaximize />} /></Link>
+        <Link to="/transactions"><Icon icon={<FaList />} /></Link>
         <Icon icon={<FaWallet />} />
         <Icon icon={<FaChartLine />} />
         <Icon icon={<FaRegClock />} />
@@ -59,7 +66,7 @@ useEffect(() => {
 
 const Icon = ({ icon }) => (
   <li>
-    <a href="#">{icon}</a>
+    <p>{icon}</p>
   </li>
 );
 

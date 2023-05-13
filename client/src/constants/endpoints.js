@@ -28,6 +28,11 @@ export const wallets_endpoint = {
   getWalletBalance: `${wallet}`,
 };
 
+//transactions end points
+const transaction = "/transactions";
+export const transactions_endpoint = {
+  getUserTransactions: `${transaction}`,
+};
 
 //payment
 export const payment = {
@@ -37,7 +42,6 @@ export const payment = {
 export const contact = {
   contactUs: "/contact-us",
 };
-
 
 //admin  users endpoints
 const users = "/admin/users";
@@ -57,5 +61,3 @@ export const getspaces_endpoint = {
   pendingSpaces: `${spaces}/pending-spaces?page=`,
   approvedSpaces: `${spaces}/approved-spaces?page=`,
 };
-
-
