@@ -33,6 +33,7 @@
     "dotenv": "^16.0.3",
     "flowbite": "^1.6.4",
     "flowbite-react": "^0.4.2",
+    "framer-motion": "^10.12.10",
     "immer": "^9.0.21",
     "javascript-time-ago": "^2.5.9",
     "jwt-decode": "^3.1.2",
