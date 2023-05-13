@@ -30,7 +30,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ["framer-motion", "react18-input-otp"],
+      external: ["framer-motion", "react18-input-otp", "react-payment-card-component"],
     },
   },
 });
