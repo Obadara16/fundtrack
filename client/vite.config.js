@@ -30,7 +30,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ["react18-input-otp", "react-payment-card-component"],
+      external: [/\breact18-input-otp\b/, /\breact-payment-card-component\b/],
     },
   },
 });
