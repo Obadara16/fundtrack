@@ -9,7 +9,7 @@ export const AppContext = createContext();
 export const Provider = (props) => {
   const [user, setUser] = useState("");
   const [name, setName] = useState("");
-  const [wallet, setWallet] = useState("");
+  const [wallet, setWallet] = useState("0");
   const [userProfile, setUserProfile] = useState("");
 
   //get profile pic

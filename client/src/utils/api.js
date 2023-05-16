@@ -1,5 +1,6 @@
 import axios from 'axios'
-const baseUrl = "http://localhost:5000/api"
+import { BASE_URL } from '../requestMethods'
+const baseUrl = `${BASE_URL}`
 
 // General Post Request
 export const generalPostRequest = async (url, _obj) => {

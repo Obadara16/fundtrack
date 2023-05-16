@@ -1,6 +1,7 @@
 const User = require("../models/authModel");
 const Transaction = require("../models/transactionModel");
 const paystack = require("paystack")(process.env.PAYSTACK_SECRET_KEY);
+const axios = require("axios")
 
 const addFunds = async (req, res) => {
   try {
@@ -34,7 +35,7 @@ const updateWalletBalance = async (req, res) => {
 
     // Verify the payment with Paystack
     const paystackResponse = await paystack.transaction.verify(reference);
-    console.log(paystackResponse);
+    console.log("paystack response is this:", paystackResponse);
 
     // Get the user associated with the Paystack reference
     const user = await User.findOne({ "walletBalance.paystackRef": reference });
@@ -47,20 +48,44 @@ const updateWalletBalance = async (req, res) => {
     user.walletBalance.paystackRef = undefined;
     await user.save();
 
-    // Create a new transaction record
+    // Resolve the account number to get the bank code and name
+    // Resolve the account number to get the bank code and name
+    const bankResponse = await axios.get(`https://api.paystack.co/bank/resolve?account_number=${paystackResponse.data.authorization.last4}&bank_code=${paystackResponse.data.authorization.bank_code}`, {
+      headers: {
+        Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+      },
+    });
+    
+
+      console.log("this is the bank response", bankResponse)
+
+      // Get the bank icon based on the bank code
+      const bankCode = bankResponse.data.data.code;
+      const bankName = bankResponse.data.data.name;
+      const bankIcon = `https://cdn.paystack.com/payment-vector-icons/banks/${bankCode}.svg`;
+
+
+
     const transaction = new Transaction({
       userId: user._id,
       type: "add",
+      iconLink: bankIcon,
+      bankName: bankName,
       amount: paystackResponse.data.amount / 100, // Convert back to Naira
       date: new Date(),
     });
     await transaction.save();
 
-    res.send({ message: paystackResponse.message });
+    res.send({ 
+      message: paystackResponse.message
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
+
+
 
 const getWalletBalance = async (req, res) => {
   try {

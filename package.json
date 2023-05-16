@@ -14,7 +14,6 @@
     "concurrently": "^7.0.0",
     "framer-motion": "^10.12.7",
     "react-icons": "^4.8.0",
-    "react-payment-card-component": "^0.2.1",
     "react-paystack": "^4.0.2",
     "react-progressive-bg-image": "^3.0.0",
     "react-stripe-checkout": "^2.6.3",

@@ -1,6 +1,6 @@
 //authentication end points
 
-const auth = "/auth/";
+const auth = "auth/";
 export const urlForAuth = {
   registration: `${auth}signup`,
   login: `${auth}login`,
@@ -14,13 +14,13 @@ export const urlForAuth = {
 };
 
 //user endpoints
-const userurl = "/users/";
+const userurl = "users/";
 export const urlForUsers = {
   getUserDetails: `${userurl}find`,
 };
 
 //wallet end points
-const wallet = "/wallets";
+const wallet = "wallets";
 export const wallets_endpoint = {
   addFunds: `${wallet}/add`,
   withdrawFunds: `${wallet}/withdraw`,
@@ -29,7 +29,7 @@ export const wallets_endpoint = {
 };
 
 //transactions end points
-const transaction = "/transactions";
+const transaction = "transactions";
 export const transactions_endpoint = {
   getUserTransactions: `${transaction}`,
 };
@@ -44,7 +44,7 @@ export const contact = {
 };
 
 //admin  users endpoints
-const users = "/admin/users";
+const users = "admin/users";
 export const user_url = {
   allusers: `${users}?page=`,
   activeUsers: `${users}/active-users?page=`,
@@ -55,7 +55,7 @@ export const user_url = {
 };
 
 //admin spaces
-const spaces = "/admin/groups";
+const spaces = "admin/groups";
 export const getspaces_endpoint = {
   allSpaces: `${spaces}?page=`,
   pendingSpaces: `${spaces}/pending-spaces?page=`,

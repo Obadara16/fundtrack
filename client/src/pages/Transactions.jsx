@@ -10,7 +10,7 @@ const Transactions = () => {
       </div>
       <section className="w-full min-h-screen bg-dashboard py-24 px-10 text-white font-poppins">
         <div className="w-3/4 mx-auto">
-          <TransactionsTable number={50} />
+          <TransactionsTable number={60} />
         </div>
       </section>
     </div>

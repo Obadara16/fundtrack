@@ -13,6 +13,7 @@ console.log("apiKey", apiKey);
 const Wallet = () => {
   const [showModal, setShowModal] = useState(false);
   const [withdrawShowModal, setWithdrawShowModal] = useState(false);
+  
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -45,7 +46,7 @@ const Wallet = () => {
       </div>
       <div className="w-full justify-center items-center text-center mt-14">
         <p className="text-center">TOTAL BALANCE</p>
-        <CurrencyFormat value={user.wallet} size={40} />
+        <CurrencyFormat value={0 ||user.wallet} size={40} />
         <p className="text-[12px]">12.81%</p>
         <div className="flex gap-4 w-full justify-center my-12">
           <button
