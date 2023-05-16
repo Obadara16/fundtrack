@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import OtpInput from "react18-input-otp";
 import { useNavigate } from "react-router-dom";
 import { postRequest } from "../utils/api";
 import { urlForUsers } from "../constants/endpoints";
@@ -59,7 +58,7 @@ const Verification = () => {
         <form className="flex flex-col" onSubmit={verify}>
           <div className="mb-10">
             <div className="flex justify-center md:mt-10">
-              <OtpInput
+              {/* <OtpInput
                 value={otp}
                 onChange={handleChange}
                 numInputs={6}
@@ -80,7 +79,7 @@ const Verification = () => {
                   border: "1px solid #CFD3DB",
                   outline: "none",
                 }}
-              />
+              /> */}
             </div>
           </div>
 
