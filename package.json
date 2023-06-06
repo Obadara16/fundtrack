@@ -4,24 +4,12 @@
   "description": "An wallet app",
   "author": "Roqeeb Obadara",
   "license": "MIT",
-  "engines": {
-    "node": "18.15.0"
-  },
   "dependencies": {
-    "@material-ui/core": "^4.12.4",
-    "@stripe/react-stripe-js": "^2.1.0",
-    "@stripe/stripe-js": "^1.52.1",
-    "concurrently": "^7.0.0",
-    "framer-motion": "^10.12.7",
-    "react-icons": "^4.8.0",
-    "react-paystack": "^4.0.2",
-    "react-progressive-bg-image": "^3.0.0",
-    "react-stripe-checkout": "^2.6.3",
-    "react-toastify": "^9.1.2"
+    "concurrently": "^8.0.1"
   },
   "scripts": {
-    "start": "yarn concurrently \"cd ./server && yarn run server\" \"cd ./client && yarn run dev\"",
-    "build": "yarn vite build --outDir=build"
+    "start": "concurrently \"cd ./server && npm run server\" \"cd ./client && npm run dev\"",
+    "build": "npm vite build --outDir=build"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

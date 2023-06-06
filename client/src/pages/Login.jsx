@@ -36,7 +36,7 @@ const Login = () => {
     color: "",
     data: "",
   });
-  const [response, setResponse] = useState({});
+  const [response, setResponse] = useState(null);
   const [toggleConfirm, setToggleConfirm] = useState(false);
 
   //togglepassword
@@ -89,7 +89,20 @@ const Login = () => {
       setShow(false);
       
     } catch (error) {
-      console.log(error)
+      setResponse(error)
+
+      if (error.message === "Network Error") {
+        setAlerting({ color: "danger", data: "No internet connection" });
+        
+        // Handle network error
+      } else if (error.response) {
+        setAlerting({ color: "danger", data: error.response.data });
+        // Handle response error (e.g., server error)
+      } else {
+        setAlerting({ color: "danger", data: "Something went wrong" });
+        // Handle other errors
+      }
+      
       
     }
     
@@ -111,7 +124,7 @@ const Login = () => {
         <div className={`${styles.boxWidth}`}>
           <div className="w-full mx-auto flex justify-center items-center flex-col my-10 gap-4">
             <form
-              className="flex flex-col mt-4 sm-w-full md:w-1/3 gap-8 bg-white p-10 rounded-xl"
+              className="flex flex-col mt-4 sm-w-full md:w-2/5 gap-8 bg-white p-10 rounded-xl"
               onSubmit={handleLogin}
             >
               <h1 className="text-2xl font-light text-gradient">Login</h1>
@@ -124,13 +137,13 @@ const Login = () => {
                   value={email}
                   onChange={({ target: { value } }) => setEmail(value)}
                   required={true}
-                  className={`block px-2.5 pb-2.5 pt-4 w-full text-sm text-secondary bg-transparent rounded-lg border border-bg-purple-gradient appearance-none dark:text-white dark:border-secondary dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-bg-purple-gradient peer
+                  className={`block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border border-bg-purple-gradient appearance-none dark:text-white dark:border-secondary dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-bg-purple-gradient peer
                   }`}
                   placeholder=" "
                 />
                 <label
                   htmlFor="email"
-                  className={`absolute text-sm text-secondary dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-btn-green peer-focus:dark:text-custom-btn-green peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 
+                  className={`absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-btn-green peer-focus:dark:text-custom-btn-green peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 
                   }`}
                 >
                   Email
@@ -144,13 +157,13 @@ const Login = () => {
                     value={password}
                     onChange={({ target: { value } }) => setPassword(value)}
                     required={true}
-                    className={`block px-2.5 pb-2.5 pt-4 w-full text-sm text-secondary bg-transparent rounded-lg border border-bg-purple-gradient appearance-none dark:text-white dark:border-secondary dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-bg-purple-gradient peer
+                    className={`block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border border-bg-purple-gradient appearance-none dark:text-white dark:border-secondary dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-bg-purple-gradient peer
                     }`}
                     placeholder=" "
                   />
                   <label
                     htmlFor="password"
-                    className={`absolute text-sm text-secondary dark:text-secondary duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-btn-green peer-focus:dark:text-custom-btn-green peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1
+                    className={`absolute text-sm text-black dark:text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-btn-green peer-focus:dark:text-custom-btn-green peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1
                     }`}
                   >
                     Password
@@ -175,13 +188,13 @@ const Login = () => {
                 </Link>
               </div>
               <div className="flex flex-col">
-                {response.statusText ? (
+                {response ? (
                   <Alert color={alerting.color} data={alerting.data} />
                 ) : null}
                 <button
                   className={`w-full px-4 h-[54px] rounded cursor-pointer ${
                     show
-                      ? "bg-blue-gradient text-secondary"
+                      ? "bg-blue-gradient text-black"
                       : "bg-purple-gradient text-white"
                   }`}
                   disabled={show}

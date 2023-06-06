@@ -23,7 +23,7 @@ const Mainbar = () => {
 
   useEffect(() => {
     // Define the regex pattern for the desired URL format
-    const urlPattern = /^http:\/\/localhost:3000\/dashboard\?/;
+    const urlPattern = /^http:\/\/localhost:5173\/dashboard\?/;
 
     // Get the current URL
     const currentUrl = window.location.href;

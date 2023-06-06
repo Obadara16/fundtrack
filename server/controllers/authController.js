@@ -138,7 +138,9 @@ const registerUser = async (req, res) => {
 
     const userExists = await User.findOne({ email });
     if (userExists) {
-      throw new Error("Email already in use");
+      // User already exists, request a new OTP
+      await requestNewOTP(req, res);
+      return; // Exit the controller to prevent further execution
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -183,6 +185,7 @@ const registerUser = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 // Verify Email Controller
 const verifyEmail = async (req, res) => {
@@ -256,20 +259,17 @@ const requestNewOTP = async (req, res) => {
       throw new Error("User not found");
     }
 
-    const otp = otpGenerator.generate(6, {
-      digits: true,
-      alphabets: false,
-      upperCase: false,
-      specialChars: false,
-    });
+    // Generate a new OTP
+    const otp = Math.floor(100000 + Math.random() * 900000);
 
-    const otpEntry = new Verification({
-      email,
-      otp,
-      expiresAt: moment().add(15, "minutes"),
-    });
-    await otpEntry.save();
+    // Save the new OTP and update the expiry time
+    const otpEntry = await Verification.findOneAndUpdate(
+      { email },
+      { otp, expiresAt: moment().add(15, "minutes") },
+      { new: true, upsert: true }
+    );
 
+    // Send the verification email with the new OTP
     await sendVerificationEmail(email, otp);
 
     res.status(200).json({ message: "New OTP sent successfully" });

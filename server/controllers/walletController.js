@@ -15,7 +15,7 @@ const addFunds = async (req, res) => {
     const paystackResponse = await paystack.transaction.initialize({
       email: user.email,
       amount: amount * 100,
-      callback_url: "http://localhost:3000/dashboard", // replace with your callback URL
+      callback_url: "http://localhost:5173/dashboard", // replace with your callback URL
     });
 
     // Save the Paystack reference in the user's walletBalance field

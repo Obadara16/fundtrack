@@ -7,8 +7,8 @@ import { paymentconfirm } from "../assets";
 
 const PaymentMessage = () => {
   const user = useContext(AppContext);
-  const [response, setResponse] = useState({});
-  const [error, setError] = useState({});
+  const [response, setResponse] = useState("");
+  const [error, setError] = useState("");
   const [amount, setAmount] = useState("");
   const [alerting, setAlerting] = useState({
     color: "",
@@ -24,10 +24,15 @@ const PaymentMessage = () => {
       const url = `${wallets_endpoint.updateWalletBalance}?reference=${reference}`;
       const response = await postRequest(url);
       console.log("the awaited response", response.data)
-      setResponse(response?.data); // set the response data as the state variable value
-      setError(response?.data); // set the response data as the state variable value
+      if (response.status === 200) {
+        setResponse("Funds added successfully"); // set the response data as the state variable value
+      }
+      else {
+        setResponse("Unauthorized  Access"); // set the response data as the state variable value
+      }
     } catch (error) {
-      console.error(error.response.data);
+      setError("An error occured while adding funds"); // set the response data as the state variable value
+      
     }
   };
 
@@ -40,10 +45,10 @@ const PaymentMessage = () => {
       <div className="flex flex-col w-full justify-center  my-12  items-center text-center gap-4">
         <img src={paymentconfirm} alt="paymenttick" height={85} width={85} />
         {response && 
-          <p className="text-sm md:text-lg font-bold">{response.message}</p>
+          <p className="text-sm md:text-lg font-bold">{response}</p>
         }
         {error && 
-          <p className="text-sm md:text-lg font-bold">{error.error}</p>
+          <p className="text-sm md:text-lg font-bold">{error}</p>
         }
       </div>
     </div>

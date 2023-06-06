@@ -8,9 +8,10 @@ const CardHistory = () => {
         <div className='flex flex-col gap-2'>
             <div className='mb-12'>
                 <h3 className='text-[20px] font-semibold mb-3'>Cards</h3>
-                <div className="w-full flex justify-center items-center h-[146px]">
+                {/* <div className="w-full flex justify-center items-center h-[146px]">
                   <p className="text-white text-center">No cards yet</p>
-                </div>
+                </div> */}
+                <CardDesign/>
             </div>
             <TransactionsTable number={3}/>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
-import Sidebar from "../components/admin/Sidebar";
-import TransactionsTable from "../components/admin/TransactionsTable";
+import Sidebar from "../components/user/Sidebar";
+import TransactionsTable from "../components/user/TransactionsTable";
 
 const Transactions = () => {
   return (
