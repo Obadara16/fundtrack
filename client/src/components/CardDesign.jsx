@@ -25,10 +25,10 @@ const CardDesign = () => {
                 <div className="horizontalLine" />
                 <div className="styles.verticalLine" />
               </div>
-              <img src={logo} alt="Visa" className="visa-logo" />
+              <img src={logo} alt="Visa" className="visa-logo h-12" />
             </div>
             <div className="card-details">
-              <div className="card-number">**** **** **** 1234</div> {/* Replace with the card number */}
+              <div className="card-number">**** **** **** 5429</div> {/* Replace with the card number */}
               <div className="card-holder uppercase">{fullName}</div> {/* Replace with the card holder name */}
               <div className="card-expiry">06/24</div> {/* Replace with the card expiry date */}
             </div>

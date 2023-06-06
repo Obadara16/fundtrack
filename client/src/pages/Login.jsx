@@ -38,6 +38,7 @@ const Login = () => {
   });
   const [response, setResponse] = useState(null);
   const [toggleConfirm, setToggleConfirm] = useState(false);
+  const navigate = useNavigate()
 
   //togglepassword
   const togglePassword = () => {
@@ -81,7 +82,7 @@ const Login = () => {
         setAlerting({ color: "success", data: `Welcome to ${AppName}` });
   
         login().then(() => {
-          window.location = "/dashboard";
+          navigate("/dashboard")
         });
       } else {
         setAlerting({ color: "danger", data: response.data.error });
