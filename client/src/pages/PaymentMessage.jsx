@@ -23,7 +23,7 @@ const PaymentMessage = () => {
     try {
       const url = `${wallets_endpoint.updateWalletBalance}?reference=${reference}`;
       const response = await postRequest(url);
-      console.log("the awaited response", response.data)
+      console.log("the awaited response", response)
       if (response.status === 200) {
         setResponse("Funds added successfully"); // set the response data as the state variable value
       }

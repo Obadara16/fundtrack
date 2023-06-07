@@ -50,27 +50,27 @@ const updateWalletBalance = async (req, res) => {
 
     // Resolve the account number to get the bank code and name
     // Resolve the account number to get the bank code and name
-    const bankResponse = await axios.get(`https://api.paystack.co/bank/resolve?account_number=${paystackResponse.data.authorization.last4}&bank_code=${paystackResponse.data.authorization.bank_code}`, {
-      headers: {
-        Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-      },
-    });
+    // const bankResponse = await axios.get(`https://api.paystack.co/bank/resolve?account_number=${paystackResponse.data.authorization.last4}&bank_code=${paystackResponse.data.authorization.bank_code}`, {
+    //   headers: {
+    //     Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+    //   },
+    // });
     
 
-      console.log("this is the bank response", bankResponse)
+    //   console.log("this is the bank response", bankResponse)
 
-      // Get the bank icon based on the bank code
-      const bankCode = bankResponse.data.data.code;
-      const bankName = bankResponse.data.data.name;
-      const bankIcon = `https://cdn.paystack.com/payment-vector-icons/banks/${bankCode}.svg`;
+    //   // Get the bank icon based on the bank code
+    //   const bankCode = bankResponse.data.data.code;
+    //   const bankName = bankResponse.data.data.name;
+    //   const bankIcon = `https://cdn.paystack.com/payment-vector-icons/banks/${bankCode}.svg`;
 
 
 
     const transaction = new Transaction({
       userId: user._id,
       type: "add",
-      iconLink: bankIcon,
-      bankName: bankName,
+      // iconLink: bankIcon,
+      // bankName: bankName,
       amount: paystackResponse.data.amount / 100, // Convert back to Naira
       date: new Date(),
     });

@@ -8,7 +8,7 @@ import CurrencyFormat from '../../atoms/CurrencyFormat';
 import DateTimeFormat from '../../atoms/DateTimeFormat';
 import { Link, useLocation } from 'react-router-dom';
 
-const TransactionsTable = ({  }) => {
+const TransactionsTable = ({ number }) => {
   const [transactions, setTransactions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
@@ -90,12 +90,14 @@ const TransactionsTable = ({  }) => {
             </div>
           );
         })}
+        {currentPath == '/transactions' && (
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={transactions.length}
           currentPage={currentPage}
           paginate={paginate}
         />
+        )}
       </div>
     </div>
   );
