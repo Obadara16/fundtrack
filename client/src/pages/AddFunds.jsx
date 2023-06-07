@@ -99,7 +99,7 @@ const AddFunds = () => {
                         type="number"
                         value={amount}
                         onChange={handleAmountChange}
-                        className={`block px-2.5 py-4  w-full h-full text-sm md:text-xl text-gray-500 bg-transparent border border-bg-purple-gradient appearance-none dark:text-gradient dark:border-secondary dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-bg-purple-gradient peer `}
+                        className={`block px-2.5 py-2.5  w-full h-full text-sm md:text-xl text-gray-500 bg-transparent border border-bg-purple-gradient appearance-none dark:text-gradient dark:border-secondary dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-bg-purple-gradient peer `}
                         placeholder="100.00 "
                       />
                       <label
